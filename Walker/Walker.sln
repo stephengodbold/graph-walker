@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Walker", "Walker.csproj", "{921694EF-BA35-442E-B435-B8FBA3A1F105}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Walker.Tests", "..\Walker.Tests\Walker.Tests.csproj", "{4FA2CAF6-5564-4DE4-A58F-1D955198A715}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{921694EF-BA35-442E-B435-B8FBA3A1F105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{921694EF-BA35-442E-B435-B8FBA3A1F105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{921694EF-BA35-442E-B435-B8FBA3A1F105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{921694EF-BA35-442E-B435-B8FBA3A1F105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA2CAF6-5564-4DE4-A58F-1D955198A715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA2CAF6-5564-4DE4-A58F-1D955198A715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA2CAF6-5564-4DE4-A58F-1D955198A715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA2CAF6-5564-4DE4-A58F-1D955198A715}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
