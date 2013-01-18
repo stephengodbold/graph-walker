@@ -40,7 +40,7 @@ namespace Walker.Tests
             var graph = builder.BuildStateGraph(document);
             var walker = new GraphWalker<string>(graph);
 
-            var walkingPath = walker.WalkToNode("Closed");
+            var walkingPath = walker.Traverse("Closed");
 
             Assert.IsNotNull(walkingPath);
         }
@@ -52,7 +52,7 @@ namespace Walker.Tests
             var builder = new WorkItemStateGraphBuilder();
             var graph = builder.BuildStateGraph(document);
 
-            var node = graph.FindRelative("Failed Testing");
+            var node = graph.Find("Failed Testing");
             
             Assert.IsNotNull(node);
         }
@@ -63,10 +63,10 @@ namespace Walker.Tests
             var document = XDocument.Load(TransitionDocument);
             var builder = new WorkItemStateGraphBuilder();
             var graph = builder.BuildStateGraph(document);
-            var node = graph.FindRelative("Failed Testing");
+            var node = graph.Find("Failed Testing");
 
             var walker = new GraphWalker<string>(node);
-            var walk = walker.WalkToNode("Closed");
+            var walk = walker.Traverse("Closed");
 
             Assert.IsNotNull(walk);
             Assert.IsNotNull(walk.Path);

@@ -4,10 +4,10 @@ namespace Walker
 {
     public static class GraphNodeExtensions
     {
-        public static GraphNode<T> FindRelative<T>(this GraphNode<T> startNode, T value)
+        public static GraphNode<T> Find<T>(this GraphNode<T> startNode, T value)
         {
             var walker = new GraphWalker<T>(startNode);
-            var walkingPath = walker.WalkToNode(value);
+            var walkingPath = walker.Traverse(value);
 
             return walkingPath.Path.Last();
         }

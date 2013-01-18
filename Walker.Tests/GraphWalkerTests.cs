@@ -12,7 +12,7 @@ namespace Walker.Tests
             var graph = new GraphNode<int> {Value = 1};
             var walker = new GraphWalker<int>(graph);
 
-            var walkingPath = walker.WalkToNode(1);
+            var walkingPath = walker.Traverse(1);
 
             Assert.AreEqual(true, walkingPath.IsValid);
             Assert.AreEqual(1, walkingPath.Path.Count, "Path length should be one (node) for single node graph");
@@ -25,12 +25,12 @@ namespace Walker.Tests
             var secondNode = new GraphNode<int> {Value = 2};
             var thirdNode = new GraphNode<int> {Value = 3};
 
-            secondNode.AddRelative(thirdNode);
-            graphRoot.AddRelative(secondNode);
+            secondNode.Add(thirdNode);
+            graphRoot.Add(secondNode);
 
             var walker = new GraphWalker<int>(graphRoot);
 
-            var walkingPath = walker.WalkToNode(3);
+            var walkingPath = walker.Traverse(3);
 
             Assert.AreEqual(true, walkingPath.IsValid);
             Assert.AreEqual(3, walkingPath.Path.Count, "Path length should be three (nodes) for three node linear graph");
@@ -43,12 +43,12 @@ namespace Walker.Tests
             var secondNode = new GraphNode<int> {Value = 2};
             var thirdNode = new GraphNode<int> {Value = 3};
 
-            graphRoot.AddRelative(secondNode);
-            graphRoot.AddRelative(thirdNode);
+            graphRoot.Add(secondNode);
+            graphRoot.Add(thirdNode);
 
             var walker = new GraphWalker<int>(graphRoot);
 
-            var walkingPath = walker.WalkToNode(3);
+            var walkingPath = walker.Traverse(3);
 
             Assert.AreEqual(true, walkingPath.IsValid);
             Assert.AreEqual(2, walkingPath.Path.Count, "Path length should be two (nodes) for three node tree graph");
@@ -63,14 +63,14 @@ namespace Walker.Tests
             var fourthNode = new GraphNode<int> {Value = 4};
             var fifthNode = new GraphNode<int> {Value = 5};
 
-            graphRoot.AddRelative(secondNode);
-            graphRoot.AddRelative(thirdNode);
-            secondNode.AddRelative(fourthNode);
-            thirdNode.AddRelative(fifthNode);
-            fourthNode.AddRelative(fifthNode);
+            graphRoot.Add(secondNode);
+            graphRoot.Add(thirdNode);
+            secondNode.Add(fourthNode);
+            thirdNode.Add(fifthNode);
+            fourthNode.Add(fifthNode);
 
             var walker = new GraphWalker<int>(graphRoot);
-            var walkingPath = walker.WalkToNode(5);
+            var walkingPath = walker.Traverse(5);
 
             Assert.AreEqual(true, walkingPath.IsValid);
             Assert.AreEqual(3, walkingPath.Path.Count, "Path length should be three (nodes) for five node graph");
@@ -87,17 +87,17 @@ namespace Walker.Tests
 
 
             //first level
-            graphRoot.AddRelative(secondNode);
-            graphRoot.AddRelative(thirdNode);
+            graphRoot.Add(secondNode);
+            graphRoot.Add(thirdNode);
 
             //second level
-            thirdNode.AddRelative(fourthNode);
-            secondNode.AddRelative(fifthNode);
+            thirdNode.Add(fourthNode);
+            secondNode.Add(fifthNode);
 
-            fourthNode.AddRelative(graphRoot);
+            fourthNode.Add(graphRoot);
 
             var walker = new GraphWalker<int>(graphRoot);
-            var walkingPath = walker.WalkToNode(5);
+            var walkingPath = walker.Traverse(5);
 
             Assert.AreEqual(true, walkingPath.IsValid);
             Assert.AreEqual(3, walkingPath.Path.Count, "Path length should be three (nodes) for six node graph");
@@ -110,15 +110,15 @@ namespace Walker.Tests
             var secondNode = new GraphNode<int> {Value = 2};
             var thirdNode = new GraphNode<int> {Value = 3};
 
-            graphRoot.AddRelative(secondNode);
-            graphRoot.AddRelative(thirdNode);
+            graphRoot.Add(secondNode);
+            graphRoot.Add(thirdNode);
 
             var walker = new GraphWalker<int>(graphRoot);
             bool exceptional = false;
 
             try
             {
-                walker.WalkToNode(5);
+                walker.Traverse(5);
             }
             catch (ArgumentOutOfRangeException ex)
             {

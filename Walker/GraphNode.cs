@@ -5,17 +5,17 @@ namespace Walker
 {
     public class GraphNode<T>
     {
+        public T Value { get; set; }
+        public ICollection<GraphNode<T>> Neighbours { get; private set; }
+
         public GraphNode()
         {
-            Relatives = new Collection<GraphNode<T>>();
+            Neighbours = new Collection<GraphNode<T>>();
         }
 
-        public T Value { get; set; }
-        public ICollection<GraphNode<T>> Relatives { get; private set; }
-
-        public void AddRelative(GraphNode<T> relative)
+        public void Add(GraphNode<T> relative)
         {
-            Relatives.Add(relative);
+            Neighbours.Add(relative);
         }
     }
 }

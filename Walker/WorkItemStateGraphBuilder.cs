@@ -30,7 +30,7 @@ namespace Walker
                 }
 
                 var sourceState = ParseGraphNode(sourceStateKey, stateCache);
-                sourceState.AddRelative(targetState);
+                sourceState.Add(targetState);
             }
 
             if (string.IsNullOrWhiteSpace(graphRootKey))
