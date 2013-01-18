@@ -14,7 +14,7 @@ namespace Walker
             _defaultPath.Step(startNode);
         }
 
-        public WalkingPath<T> FindNodeByValue(T value)
+        public WalkingPath<T> WalkToNode(T value)
         {
             var paths = new Collection<WalkingPath<T>> {_defaultPath};
             var startNode = _defaultPath.Path[0];
@@ -48,7 +48,7 @@ namespace Walker
             }
 
             throw new ArgumentOutOfRangeException("value", value, "The value was not found in the graph");
-        }
+        }       
     }
 
     public class WalkingPath<T>

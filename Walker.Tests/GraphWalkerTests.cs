@@ -12,7 +12,7 @@ namespace Walker.Tests
             var graph = new GraphNode<int> {Value = 1};
             var walker = new GraphWalker<int>(graph);
 
-            var walkingPath = walker.FindNodeByValue(1);
+            var walkingPath = walker.WalkToNode(1);
 
             Assert.AreEqual(true, walkingPath.IsValid);
             Assert.AreEqual(1, walkingPath.Path.Count, "Path length should be one (node) for single node graph");
@@ -30,7 +30,7 @@ namespace Walker.Tests
 
             var walker = new GraphWalker<int>(graphRoot);
 
-            var walkingPath = walker.FindNodeByValue(3);
+            var walkingPath = walker.WalkToNode(3);
 
             Assert.AreEqual(true, walkingPath.IsValid);
             Assert.AreEqual(3, walkingPath.Path.Count, "Path length should be three (nodes) for three node linear graph");
@@ -48,7 +48,7 @@ namespace Walker.Tests
 
             var walker = new GraphWalker<int>(graphRoot);
 
-            var walkingPath = walker.FindNodeByValue(3);
+            var walkingPath = walker.WalkToNode(3);
 
             Assert.AreEqual(true, walkingPath.IsValid);
             Assert.AreEqual(2, walkingPath.Path.Count, "Path length should be two (nodes) for three node tree graph");
@@ -70,7 +70,7 @@ namespace Walker.Tests
             fourthNode.AddRelative(fifthNode);
 
             var walker = new GraphWalker<int>(graphRoot);
-            var walkingPath = walker.FindNodeByValue(5);
+            var walkingPath = walker.WalkToNode(5);
 
             Assert.AreEqual(true, walkingPath.IsValid);
             Assert.AreEqual(3, walkingPath.Path.Count, "Path length should be three (nodes) for five node graph");
@@ -97,7 +97,7 @@ namespace Walker.Tests
             fourthNode.AddRelative(graphRoot);
 
             var walker = new GraphWalker<int>(graphRoot);
-            var walkingPath = walker.FindNodeByValue(5);
+            var walkingPath = walker.WalkToNode(5);
 
             Assert.AreEqual(true, walkingPath.IsValid);
             Assert.AreEqual(3, walkingPath.Path.Count, "Path length should be three (nodes) for six node graph");
@@ -118,7 +118,7 @@ namespace Walker.Tests
 
             try
             {
-                walker.FindNodeByValue(5);
+                walker.WalkToNode(5);
             }
             catch (ArgumentOutOfRangeException ex)
             {

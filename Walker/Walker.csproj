@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GraphNodeExtensions.cs" />
     <Compile Include="WorkItemStateGraphBuilder.cs" />
     <Compile Include="GraphNode.cs" />
     <Compile Include="GraphWalker.cs" />

@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TRANSITIONS>
+  <TRANSITION from="Testing Required" to="Closed">
+    <REASONS>
+      <DEFAULTREASON value="Testing Complete" />
+    </REASONS>
+    <FIELDS>
+      <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+        <COPY from="currentuser" />
+        <VALIDUSER />
+        <REQUIRED />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+        <SERVERDEFAULT from="clock" />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+        <READONLY />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+        <READONLY />
+      </FIELD>
+    </FIELDS>
+  </TRANSITION>
+  <TRANSITION from="" to="Unapproved">
+    <REASONS>
+      <DEFAULTREASON value="Created" />
+    </REASONS>
+    <FIELDS>
+      <FIELD refname="Microsoft.VSTS.Common.Priority">
+        <COPY from="value" value="2" />
+      </FIELD>
+    </FIELDS>
+  </TRANSITION>
+  <TRANSITION from="Unapproved" to="Closed">
+    <REASONS>
+      <DEFAULTREASON value="Not required">
+        <FIELDS>
+          <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+            <SERVERDEFAULT from="clock" />
+          </FIELD>
+          <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+            <COPY from="currentuser" />
+          </FIELD>
+        </FIELDS>
+      </DEFAULTREASON>
+    </REASONS>
+    <FIELDS>
+      <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+        <COPY from="currentuser" />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+        <COPY from="clock" />
+      </FIELD>
+    </FIELDS>
+  </TRANSITION>
+  <TRANSITION from="Business Approved" to="Closed">
+    <REASONS>
+      <DEFAULTREASON value="Not required" />
+    </REASONS>
+    <FIELDS>
+      <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+        <SERVERDEFAULT from="clock" />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+        <COPY from="currentuser" />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Common.ResolvedBy">
+        <COPY from="currentuser" />
+        <VALIDUSER />
+        <READONLY />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Common.ResolvedDate">
+        <SERVERDEFAULT from="clock" />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Common.ResolvedReason">
+        <COPY from="field" field="System.Reason" />
+      </FIELD>
+    </FIELDS>
+  </TRANSITION>
+  <TRANSITION from="Closed" to="Business Approved">
+    <REASONS>
+      <DEFAULTREASON value="Reactivated" />
+    </REASONS>
+    <FIELDS>
+      <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+        <COPY from="currentuser" />
+        <VALIDUSER />
+        <REQUIRED />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+        <SERVERDEFAULT from="clock" />
+      </FIELD>
+      <FIELD refname="System.AssignedTo">
+        <COPY from="field" field="Microsoft.VSTS.Common.ClosedBy" />
+      </FIELD>
+    </FIELDS>
+  </TRANSITION>
+  <TRANSITION from="Unapproved" to="Business Approved">
+    <REASONS>
+      <DEFAULTREASON value="Approved" />
+    </REASONS>
+    <FIELDS>
+      <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+        <SERVERDEFAULT from="clock" />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+        <COPY from="currentuser" />
+      </FIELD>
+    </FIELDS>
+  </TRANSITION>
+  <TRANSITION from="Business Approved" to="Development Approved">
+    <REASONS>
+      <DEFAULTREASON value="Approved For Development" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Development Approved" to="Business Approved">
+    <REASONS>
+      <DEFAULTREASON value="Unapproved For Development" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Complete Pending Deploy" to="Development Approved">
+    <REASONS>
+      <DEFAULTREASON value="Task Not Completed" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Complete Pending Deploy" to="Testing Required">
+    <REASONS>
+      <DEFAULTREASON value="Deployed To Test" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Complete Pending Deploy" to="Closed">
+    <REASONS>
+      <DEFAULTREASON value="Obsolete">
+        <FIELDS>
+          <FIELD refname="Microsoft.VSTS.Common.ClosedBy">
+            <COPY from="currentuser" />
+            <READONLY />
+            <VALIDUSER />
+          </FIELD>
+          <FIELD refname="Microsoft.VSTS.Common.ClosedDate">
+            <SERVERDEFAULT from="clock" />
+          </FIELD>
+          <FIELD refname="Microsoft.VSTS.Common.ResolvedBy">
+            <READONLY />
+          </FIELD>
+          <FIELD refname="Microsoft.VSTS.Common.ResolvedDate">
+            <READONLY />
+          </FIELD>
+          <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+            <READONLY />
+          </FIELD>
+          <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+            <READONLY />
+          </FIELD>
+        </FIELDS>
+      </DEFAULTREASON>
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Development Approved" to="Testing Required">
+    <REASONS>
+      <DEFAULTREASON value="Fixed - No Deployment Needed" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Business Approved" to="Completed">
+    <REASONS>
+      <DEFAULTREASON value="Completed" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Completed" to="Closed">
+    <REASONS>
+      <DEFAULTREASON value="Closed" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Completed" to="Business Approved">
+    <REASONS>
+      <DEFAULTREASON value="Not Completed" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Business Approved" to="Unapproved">
+    <REASONS>
+      <DEFAULTREASON value="Unapproved" />
+    </REASONS>
+    <FIELDS>
+      <FIELD refname="Microsoft.VSTS.Common.ActivatedBy">
+        <EMPTY />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Common.ActivatedDate">
+        <EMPTY />
+      </FIELD>
+    </FIELDS>
+  </TRANSITION>
+  <TRANSITION from="Development Approved" to="Closed">
+    <REASONS>
+      <DEFAULTREASON value="Not Needed" />
+      <REASON value="Duplicate" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Developer Tested" to="Complete Pending Deploy">
+    <REASONS>
+      <DEFAULTREASON value="Task Completed" />
+    </REASONS>
+    <FIELDS>
+      <FIELD refname="System.AssignedTo">
+        <COPY from="value" value="STAFF\pcoe" />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Common.ResolvedBy">
+        <COPY from="currentuser" />
+        <VALIDUSER />
+        <REQUIRED />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Common.ResolvedDate">
+        <SERVERDEFAULT from="clock" />
+      </FIELD>
+      <FIELD refname="Microsoft.VSTS.Scheduling.RemainingWork">
+        <EMPTY />
+      </FIELD>
+    </FIELDS>
+  </TRANSITION>
+  <TRANSITION from="Developer Tested" to="Development Approved">
+    <REASONS>
+      <DEFAULTREASON value="Test Failed" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Development Approved" to="Developer Tested">
+    <REASONS>
+      <DEFAULTREASON value="Tested" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Failed Testing" to="Business Approved">
+    <REASONS>
+      <DEFAULTREASON value="Task Not Complete" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Failed Testing" to="Testing Required">
+    <REASONS>
+      <DEFAULTREASON value="Retest" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Failed Testing" to="Development Approved">
+    <REASONS>
+      <DEFAULTREASON value="Approved" />
+    </REASONS>
+  </TRANSITION>
+  <TRANSITION from="Testing Required" to="Failed Testing">
+    <REASONS>
+      <DEFAULTREASON value="Test Failed" />
+    </REASONS>
+  </TRANSITION>
+</TRANSITIONS>
