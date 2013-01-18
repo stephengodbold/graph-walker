@@ -7,9 +7,9 @@ namespace Walker
         public static GraphNode<T> Find<T>(this GraphNode<T> startNode, T value)
         {
             var walker = new GraphWalker<T>(startNode);
-            var walkingPath = walker.Traverse(value);
+            var path = walker.TraverseTo(value);
 
-            return walkingPath.Path.Last();
+            return path.Last();
         }
     }
 }

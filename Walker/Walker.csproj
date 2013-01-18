@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GraphNodeExtensions.cs" />
+    <Compile Include="Path.cs" />
     <Compile Include="WorkItemStateGraphBuilder.cs" />
     <Compile Include="GraphNode.cs" />
     <Compile Include="GraphWalker.cs" />

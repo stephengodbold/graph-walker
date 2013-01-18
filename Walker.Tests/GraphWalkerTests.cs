@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Walker.Tests
@@ -12,10 +13,10 @@ namespace Walker.Tests
             var graph = new GraphNode<int> {Value = 1};
             var walker = new GraphWalker<int>(graph);
 
-            var walkingPath = walker.Traverse(1);
+            var path = walker.TraverseTo(1);
 
-            Assert.AreEqual(true, walkingPath.IsValid);
-            Assert.AreEqual(1, walkingPath.Path.Count, "Path length should be one (node) for single node graph");
+            Assert.AreEqual(true, path.IsValid);
+            Assert.AreEqual(1, path.Count(), "Path length should be one (node) for single node graph");
         }
 
         [TestMethod]
@@ -30,10 +31,10 @@ namespace Walker.Tests
 
             var walker = new GraphWalker<int>(graphRoot);
 
-            var walkingPath = walker.Traverse(3);
+            var path = walker.TraverseTo(3);
 
-            Assert.AreEqual(true, walkingPath.IsValid);
-            Assert.AreEqual(3, walkingPath.Path.Count, "Path length should be three (nodes) for three node linear graph");
+            Assert.AreEqual(true, path.IsValid);
+            Assert.AreEqual(3, path.Count(), "Path length should be three (nodes) for three node linear graph");
         }
 
         [TestMethod]
@@ -48,10 +49,10 @@ namespace Walker.Tests
 
             var walker = new GraphWalker<int>(graphRoot);
 
-            var walkingPath = walker.Traverse(3);
+            var path = walker.TraverseTo(3);
 
-            Assert.AreEqual(true, walkingPath.IsValid);
-            Assert.AreEqual(2, walkingPath.Path.Count, "Path length should be two (nodes) for three node tree graph");
+            Assert.AreEqual(true, path.IsValid);
+            Assert.AreEqual(2, path.Count(), "Path length should be two (nodes) for three node tree graph");
         }
 
         [TestMethod]
@@ -70,10 +71,10 @@ namespace Walker.Tests
             fourthNode.Add(fifthNode);
 
             var walker = new GraphWalker<int>(graphRoot);
-            var walkingPath = walker.Traverse(5);
+            var path = walker.TraverseTo(5);
 
-            Assert.AreEqual(true, walkingPath.IsValid);
-            Assert.AreEqual(3, walkingPath.Path.Count, "Path length should be three (nodes) for five node graph");
+            Assert.AreEqual(true, path.IsValid);
+            Assert.AreEqual(3, path.Count(), "Path length should be three (nodes) for five node graph");
         }
 
         [TestMethod]
@@ -97,10 +98,10 @@ namespace Walker.Tests
             fourthNode.Add(graphRoot);
 
             var walker = new GraphWalker<int>(graphRoot);
-            var walkingPath = walker.Traverse(5);
+            var path = walker.TraverseTo(5);
 
-            Assert.AreEqual(true, walkingPath.IsValid);
-            Assert.AreEqual(3, walkingPath.Path.Count, "Path length should be three (nodes) for six node graph");
+            Assert.AreEqual(true, path.IsValid);
+            Assert.AreEqual(3, path.Count(), "Path length should be three (nodes) for six node graph");
         }
 
         [TestMethod]
@@ -114,11 +115,11 @@ namespace Walker.Tests
             graphRoot.Add(thirdNode);
 
             var walker = new GraphWalker<int>(graphRoot);
-            bool exceptional = false;
+            var exceptional = false;
 
             try
             {
-                walker.Traverse(5);
+                walker.TraverseTo(5);
             }
             catch (ArgumentOutOfRangeException ex)
             {

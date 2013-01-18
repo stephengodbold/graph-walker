@@ -40,7 +40,7 @@ namespace Walker.Tests
             var graph = builder.BuildStateGraph(document);
             var walker = new GraphWalker<string>(graph);
 
-            var walkingPath = walker.Traverse("Closed");
+            var walkingPath = walker.TraverseTo("Closed");
 
             Assert.IsNotNull(walkingPath);
         }
@@ -66,10 +66,9 @@ namespace Walker.Tests
             var node = graph.Find("Failed Testing");
 
             var walker = new GraphWalker<string>(node);
-            var walk = walker.Traverse("Closed");
+            var walk = walker.TraverseTo("Closed");
 
             Assert.IsNotNull(walk);
-            Assert.IsNotNull(walk.Path);
         }
     }
 }
