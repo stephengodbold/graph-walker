@@ -6,20 +6,20 @@ namespace Walker
 {
     public class GraphWalker<T>
     {
-        private readonly Path<T> _defaultPath;
+        private readonly Path<T> defaultPath;
 
         public GraphWalker(GraphNode<T> startNode)
         {
-            _defaultPath = new Path<T>();
-            _defaultPath.Step(startNode);
+            defaultPath = new Path<T>();
+            defaultPath.Step(startNode);
         }
 
         public Path<T> TraverseTo(T value)
         {
-            var paths = new Collection<Path<T>> {_defaultPath};
-            var startNode = _defaultPath.First();
+            var paths = new Collection<Path<T>> {defaultPath};
+            var startNode = defaultPath.First();
 
-            if (startNode.Neighbours.Count == 0) return _defaultPath;
+            if (startNode.Neighbours.Count == 0) return defaultPath;
 
             var currentPaths = new Collection<Path<T>>(paths.ToArray());
 
@@ -48,6 +48,6 @@ namespace Walker
             }
 
             throw new ArgumentOutOfRangeException("value", value, "The value was not found in the graph");
-        }       
+        }
     }
 }
